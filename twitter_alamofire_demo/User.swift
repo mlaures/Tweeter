@@ -57,8 +57,8 @@ class User {
         screenName = dictionary["screen_name"] as? String
         
         // for the image
-        profileImageURL = dictionary["profile_image_url"]
-
+        let profileImage = dictionary["profile_image_url"] as? String
+        profileImageURL = URL(string: profileImage!)
     }
     
     

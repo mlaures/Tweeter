@@ -21,9 +21,16 @@ class TweetCell: UITableViewCell {
         didSet {
             tweetTextLabel.text = tweet.text
             userNameLabel.text = tweet.user.name
-            userScreenNamelabel.text = tweet.user.screenName
+            if let screenName = tweet.user.screenName {
+                userScreenNamelabel.text = "@ \(screenName)"
+            }
             tweetTimeStamp.text = tweet.createdAtString
-            userProfileImage.image.af_setImage(withURL: tweet.user.profileImageURL)
+
+            if let url = tweet.user.profileImageURL {
+                print("can unwrap URL")
+                print(url)
+                userProfileImage.af_setImage(withURL: url)
+            }
             
         }
     }
