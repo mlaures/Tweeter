@@ -7,12 +7,14 @@
 //
 
 import Foundation
+import UIKit
 
 class User {
     
     // user properties
     var name: String?
     var screenName: String?
+    var profileImageURL: URL?
     
     // for persisted user
     var dictionary: [String: Any]?
@@ -53,6 +55,9 @@ class User {
         // initialize other user properties
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
+        
+        // for the image
+        profileImageURL = dictionary["profile_image_url"]
 
     }
     
