@@ -53,8 +53,8 @@ class APIManager: SessionManager {
     func logout() {
         clearCredentials()
         
-        // TODO: Clear current user by setting it to nil
-        
+        // set the current user to nil so that the app no longer logs in as the user
+        User.current = nil
 
         NotificationCenter.default.post(name: NSNotification.Name("didLogout"), object: nil)
     }
