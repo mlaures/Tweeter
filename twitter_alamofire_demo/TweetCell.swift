@@ -17,21 +17,36 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetTimeStamp: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
     
+    @IBOutlet weak var replyButton: UIImageView!
+    @IBOutlet weak var retweetButton: UIImageView!
+    @IBOutlet weak var retweetCountLabel: UILabel!
+    @IBOutlet weak var favoriteButton: UIImageView!
+    @IBOutlet weak var favoriteCountLabel: UILabel!
+    
+    
     var tweet: Tweet! {
         didSet {
+            // main body of the tweet
             tweetTextLabel.text = tweet.text
             userNameLabel.text = tweet.user.name
+            tweetTimeStamp.text = tweet.createdAtString
             if let screenName = tweet.user.screenName {
                 userScreenNamelabel.text = "@ \(screenName)"
             }
-            tweetTimeStamp.text = tweet.createdAtString
-
             if let url = tweet.user.profileImageURL {
-                print("can unwrap URL")
-                print(url)
                 userProfileImage.af_setImage(withURL: url)
             }
             
+            // extras for the tweet
+            retweetCountLabel.text = String(describing: tweet.retweetCount)
+            favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
+            
+            if tweet.retweeted {
+                retweetButton.image = #imageLiteral(resourceName: "retweet-icon-green")
+            }
+            if tweet.favorited! {
+                favoriteButton.image = #imageLiteral(resourceName: "favor-icon-red")
+            }
         }
     }
     
