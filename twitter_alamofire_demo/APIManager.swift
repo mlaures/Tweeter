@@ -128,11 +128,12 @@ class APIManager: SessionManager {
             .validate()
             .responseJSON { (response) in
                 if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
+                    // the network request was a success so pass in the returned tweet (original)
                     let tweet = Tweet(dictionary: tweetDictionary)
-                    
                     completion(tweet, nil)
                     
                 } else {
+                    // network request failed so pass in the error
                     print(response.description)
                     completion(nil, response.result.error)
                 }
@@ -150,9 +151,11 @@ class APIManager: SessionManager {
             .validate()
             .responseJSON { (response) in
                 if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
+                    // the network request was a success so pass in the returned tweet (original)
                     let tweet = Tweet(dictionary: tweetDictionary)
                     completion(tweet, nil)
                 } else {
+                    // network request failed so pass in the errror
                     print(response.description)
                     completion(nil, response.result.error)
                 }
@@ -160,6 +163,26 @@ class APIManager: SessionManager {
     }
     
     // MARK: TODO: Retweet
+    func retweet (with tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        // set up url and parameters for network call
+        let id = tweet.id
+        let urlString = "https://api.twitter.com/1.1/statuses/retweet/\(id).json"
+        
+        // make the network request
+        request(urlString, method: .post, parameters: nil, encoding: URLEncoding.queryString, headers: nil)
+            .validate()
+            .responseJSON { (response) in
+                if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
+                    // the network request was a success so pass in the returned tweet (original)
+                    let tweet = Tweet(dictionary: tweetDictionary)
+                    completion(tweet, nil)
+                } else {
+                    // network request failed so pass in the error
+                    print(response.description)
+                    completion(nil, response.result.error)
+                }
+        }
+    }
     
     // MARK: TODO: Un-Retweet
     

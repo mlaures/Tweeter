@@ -141,6 +141,9 @@
                                                         <constraint firstAttribute="height" constant="46" id="xwz-kG-g4v"/>
                                                     </constraints>
                                                     <state key="normal" image="retweet-icon"/>
+                                                    <connections>
+                                                        <action selector="toggleRetweet:" destination="U1g-kw-izy" eventType="touchUpInside" id="IaJ-IZ-h9u"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eL-rM-sYv">
                                                     <rect key="frame" x="8" y="156" width="46" height="46"/>
@@ -184,6 +187,7 @@
                                             <outlet property="replyButton" destination="0eL-rM-sYv" id="hIi-pO-gDq"/>
                                             <outlet property="retweetButton" destination="5Sw-Ll-bfU" id="amd-7M-qrk"/>
                                             <outlet property="retweetCountLabel" destination="yqu-6E-1rb" id="Y3U-D4-H8F"/>
+                                            <outlet property="toggleRetweet" destination="5Sw-Ll-bfU" id="Mol-YO-irn"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
                                             <outlet property="tweetTimeStamp" destination="wNw-Jm-jYZ" id="EDr-U0-rYE"/>
                                             <outlet property="userNameLabel" destination="FrL-tV-inu" id="CBa-9v-OP2"/>
