@@ -32,6 +32,9 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 100
         
+        //gets rid of separator between cells
+        tableView.separatorStyle = UITableViewCellSeparatorStyle.none
+        
         // network call to twitter API
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
