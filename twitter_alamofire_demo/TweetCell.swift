@@ -17,37 +17,98 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var tweetTimeStamp: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
     
-    @IBOutlet weak var replyButton: UIImageView!
-    @IBOutlet weak var retweetButton: UIImageView!
+    @IBOutlet weak var replyButton: UIButton!
+    @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var retweetCountLabel: UILabel!
-    @IBOutlet weak var favoriteButton: UIImageView!
+    @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteCountLabel: UILabel!
     
     
-    var tweet: Tweet! {
+    var cellTweet: Tweet! {
         didSet {
             // main body of the tweet
-            tweetTextLabel.text = tweet.text
-            userNameLabel.text = tweet.user.name
-            tweetTimeStamp.text = tweet.createdAtString
-            if let screenName = tweet.user.screenName {
+            tweetTextLabel.text = cellTweet.text
+            userNameLabel.text = cellTweet.user.name
+            tweetTimeStamp.text = cellTweet.createdAtString
+            if let screenName = cellTweet.user.screenName {
                 userScreenNamelabel.text = "@ \(screenName)"
             }
-            if let url = tweet.user.profileImageURL {
+            if let url = cellTweet.user.profileImageURL {
                 userProfileImage.af_setImage(withURL: url)
             }
             
             // extras for the tweet
-            retweetCountLabel.text = String(describing: tweet.retweetCount)
-            favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
+            retweetCountLabel.text = String(describing: cellTweet.retweetCount)
+            favoriteCountLabel.text = String(describing: cellTweet.favoriteCount!)
             
-            if tweet.retweeted {
-                retweetButton.image = #imageLiteral(resourceName: "retweet-icon-green")
+            if cellTweet.retweeted {
+                retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
             }
-            if tweet.favorited! {
-                favoriteButton.image = #imageLiteral(resourceName: "favor-icon-red")
+            if cellTweet.favorited! {
+                favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
             }
         }
+    }
+    
+    @IBAction func toggleFavorite(_ sender: Any) {
+        if cellTweet.favorited! {
+            APIManager.shared.unfavoriteTweet(with: cellTweet, completion: { (tweet, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    if let tweet = tweet {
+                        print("in closure")
+                        print(tweet.favorited!)
+                        print(tweet.favoriteCount!)
+                        
+                        print(tweet.id)
+
+                        self.cellTweet = tweet
+                        
+                        print(self.cellTweet.id)
+                        
+                        // change what the user sees to reflect the action
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
+                        self.favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
+                    }
+                }
+            })
+        } else if !cellTweet.favorited! {
+            APIManager.shared.favoriteTweet(with: cellTweet, completion: { (tweet, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    if let tweet = tweet {
+                        print("in closure")
+                        print(tweet.favorited!)
+                        print(tweet.favoriteCount!)
+                        
+                        print(tweet.id)
+                        print(self.cellTweet.id)
+
+                        
+                        self.cellTweet = tweet
+                        
+                        print(self.cellTweet.id)
+                        
+                        // change what the user sees to reflect the action
+                        self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
+                        self.favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
+                    
+                    }
+                }
+            })
+            
+
+            
+            
+            
+        } else {
+            assert(false, "the tweet favorite bool failed")
+        }
+        
+        // push new information to the network
+        
     }
     
     override func awakeFromNib() {
