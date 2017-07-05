@@ -63,15 +63,8 @@ class TweetCell: UITableViewCell {
                     print(error.localizedDescription)
                 } else {
                     if let tweet = tweet {
-                        print("in closure")
-                        print(tweet.favorited!)
-                        print(tweet.favoriteCount!)
-                        
-                        print(tweet.id)
-
+                        // set the returned data as the new data for the cell
                         self.cellTweet = tweet
-                        
-                        print(self.cellTweet.id)
                         
                         // change what the user sees to reflect the action
                         self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
@@ -85,17 +78,8 @@ class TweetCell: UITableViewCell {
                     print(error.localizedDescription)
                 } else {
                     if let tweet = tweet {
-                        print("in closure")
-                        print(tweet.favorited!)
-                        print(tweet.favoriteCount!)
-                        
-                        print(tweet.id)
-                        print(self.cellTweet.id)
-
-                        
+                        // set the returned data as new data for the cell
                         self.cellTweet = tweet
-                        
-                        print(self.cellTweet.id)
                         
                         // change what the user sees to reflect the action
                         self.favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
@@ -103,17 +87,11 @@ class TweetCell: UITableViewCell {
                     
                     }
                 }
-            })
-            
-
-            
-            
+            }) 
             
         } else {
             assert(false, "the tweet favorite bool failed")
         }
-        
-        // push new information to the network
         
     }
     

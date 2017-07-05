@@ -122,26 +122,13 @@ class APIManager: SessionManager {
         // set up url and parameters for network call
         let urlString = "https://api.twitter.com/1.1/favorites/create.json"
         let parameters: Parameters = ["id":tweet.id]
-        print("favorite: before network")
-        print(tweet.id)
-        print(tweet.favorited!)
-        print(tweet.favoriteCount!)
-        
+
         // make the post network request
         request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: nil)
             .validate()
             .responseJSON { (response) in
                 if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
                     let tweet = Tweet(dictionary: tweetDictionary)
-                    
-                    print("after network")
-                    print(tweet.id)
-                    print(tweet.favorited!)
-                    print(tweet.favoriteCount!)
-
-                    
-                    // this assumes that the network will not return the correct number of tweets (true when network calling is off)
-                    tweet.favoriteCount! += 1
                     
                     completion(tweet, nil)
                     
@@ -155,28 +142,15 @@ class APIManager: SessionManager {
     
     func unfavoriteTweet (with tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
         // set up url and parameters for network call
-        let urlString = "https://api.twitter.com/1.1/favorites/create.json"
+        let urlString = "https://api.twitter.com/1.1/favorites/destroy.json"
         let parameters: Parameters = ["id":tweet.id]
-        print("unfavorite: before network")
-        print(tweet.id)
-        print(tweet.favorited!)
-        print(tweet.favoriteCount!)
-        
+
         // make the post network request
         request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString, headers: nil)
-//            .validate()
+            .validate()
             .responseJSON { (response) in
                 if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
-                    //let tweet = Tweet(dictionary: tweetDictionary)
-                    
-                    print("after network")
-                    print(tweet.id)
-                    print(tweet.favorited!)
-                    print(tweet.favoriteCount!)
-                    
-                    // this assumes that the network will not return the correct number of tweets (true when network calling is off)
-                    tweet.favoriteCount! -= 1
-                    
+                    let tweet = Tweet(dictionary: tweetDictionary)
                     completion(tweet, nil)
                 } else {
                     print(response.description)
