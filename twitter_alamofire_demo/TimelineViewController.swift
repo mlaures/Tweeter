@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class TimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
     
     var tweets: [Tweet] = []
     
@@ -86,17 +86,29 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     @IBAction func newPost(_ sender: Any) {
         // make the segue (any information passed into compose view should be put in prepare function)
+        print("make a new post")
         performSegue(withIdentifier: "composeSegue", sender: sender)
     }
     
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
+
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destinationViewController.
-     // Pass the selected object to the new view controller.
+        if segue.identifier == "composeSegue" {
+            let nav = segue.destination as! UINavigationController
+            let composeViewController = nav.topViewController as! ComposeViewController
+            composeViewController.delegate = self
+        }
+
      }
-     */
+    
+    func didAddPost(post: Tweet) {
+        // add the newest tweet to the top of the list
+        var newTweets: [Tweet] = [post]
+        newTweets += tweets
+        
+        // reset the tweets and reload the table
+        tweets = newTweets
+        tableView.reloadData()
+        
+    }
     
 }
