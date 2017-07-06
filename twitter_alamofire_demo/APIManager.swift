@@ -213,14 +213,30 @@ class APIManager: SessionManager {
                 .responseJSON { (response: DataResponse<Any>) in
                     print(response.result.isSuccess)
                     if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
-                        print(tweetDictionary)
                         let idDictionary = tweetDictionary["current_user_retweet"] as! [String:Any]
-                        print(idDictionary)
                         id = idDictionary["id"] as! Int64
+                        
+                        print("start destroy network request")
+                        // destroy the retweet through its id
+                        print("status id: \(id)")
+                        let urlDestroy = "https://api.twitter.com/1.1/statuses/unretweet/\(id).json"
+                        self.request(urlDestroy, method: .post, parameters: nil, encoding: URLEncoding.queryString, headers: nil)
+                            .validate()
+                            .responseJSON { (response) in
+                                if response.result.isSuccess{
+                                    completion(nil, nil)
+                                } else {
+                                    // network request failed so pass in the error
+                                    print("destroy failed")
+                                    print(response.description)
+                                    completion(nil, response.result.error)
+                                }
+                        }
                     } else {
                         print("original tweet network request")
                         print(response.description)
                         print(response.result.error!.localizedDescription)
+                        completion(nil, response.result.error)
                     }
             }
         } else {
@@ -228,22 +244,7 @@ class APIManager: SessionManager {
         }
         
         
-        print("start destroy network request")
-        // destroy the retweet through its id
-        print("status id: \(id)")
-        let urlDestroy = "https://api.twitter.com/1.1/statuses/unretweet/\(id).json"
-        request(urlDestroy, method: .post, parameters: nil, encoding: URLEncoding.queryString, headers: nil)
-            .validate()
-            .responseJSON { (response) in
-                if response.result.isSuccess{
-                    completion(nil, nil)
-                } else {
-                    // network request failed so pass in the error
-                    print("destroy failed")
-                    print(response.description)
-                    completion(nil, response.result.error)
-                }
-        }
+        
         
         
         
@@ -253,10 +254,9 @@ class APIManager: SessionManager {
     // MARK: TODO: Compose Tweet
     func compose (with message: String, completion: @escaping (Tweet?, Error?)->()) {
         // make the status that will be posted to the network
-        
         let urlString = "https://api.twitter.com/1.1/statuses/update.json"
         let parameters = ["status" : message]
-        request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+        request(urlString, method: .post, parameters: parameters, encoding: URLEncoding.queryString)
             .validate()
             .responseJSON { (response) in
                 if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
