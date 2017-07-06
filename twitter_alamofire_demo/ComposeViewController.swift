@@ -9,7 +9,7 @@
 import UIKit
 import AlamofireImage
 
-protocol ComposeViewControllerDelegate {
+protocol ComposeViewControllerDelegate: class {
     func didAddPost(post: Tweet)
 }
 
@@ -46,6 +46,7 @@ class ComposeViewController: UIViewController {
     
     @IBAction func postTweet(_ sender: Any) {
         // Make the call to API
+        print("making call")
         APIManager.shared.compose(with: tweetText.text) { (tweet, error) in
             if let error = error {
                 // there has been an error, must show this
@@ -54,7 +55,9 @@ class ComposeViewController: UIViewController {
                 if let tweet = tweet {
                     // pass this tweet into the feed so that is shows up immediately
                     self.delegate?.didAddPost(post: tweet)
+                    print(tweet)
                     print("tweet properly posted")
+                    self.dismiss(animated: true, completion: nil)
                 }
             }
         }

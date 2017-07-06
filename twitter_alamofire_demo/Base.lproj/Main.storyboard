@@ -220,10 +220,10 @@
                                 <rect key="frame" x="275" y="8" width="84" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit-icon"/>
+                                <connections>
+                                    <action selector="newPost:" destination="5YO-Vh-39k" eventType="touchUpInside" id="nBh-Hd-f0f"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="newPost:" destination="5YO-Vh-39k" id="pk8-Se-gjS"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -296,10 +296,10 @@
                                 <rect key="frame" x="16" y="10" width="82" height="24"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="close-icon"/>
+                                <connections>
+                                    <action selector="cancelPost:" destination="0dW-zk-wOI" eventType="touchUpInside" id="PBn-LU-5cm"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="cancelPost:" destination="0dW-zk-wOI" id="rR6-Q7-VYg"/>
-                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="T6D-Ms-RQl">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jVE-lQ-TQE">
@@ -307,10 +307,10 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Post"/>
+                                <connections>
+                                    <action selector="postTweet:" destination="0dW-zk-wOI" eventType="touchUpInside" id="Ic6-tD-ohP"/>
+                                </connections>
                             </button>
-                            <connections>
-                                <action selector="postTweet:" destination="0dW-zk-wOI" id="2v0-SG-JRj"/>
-                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
