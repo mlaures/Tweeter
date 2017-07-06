@@ -44,8 +44,26 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         // need to check which user data is going to be fetched
         if let user = user {
             // do network call with the passed in user
+            APIManager.shared.getUserTimeline(with: user, completion: { (tweets, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    // make the list of tweets and reload the table data
+                    self.tweets = tweets!
+                    self.tableView.reloadData()
+                }
+            })
         } else {
             // do network call with the current user
+            APIManager.shared.getUserTimeline(with: User.current!, completion: { (tweets, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    // make the list of tweets and reload the table data
+                    self.tweets = tweets!
+                    self.tableView.reloadData()
+                }
+            })
         }
         
     }
@@ -68,7 +86,7 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func didAddPost(post: Tweet) {
-        <#code#>
+        // this is a placeholder
     }
     
     /*
