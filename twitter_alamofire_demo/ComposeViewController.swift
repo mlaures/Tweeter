@@ -13,7 +13,7 @@ protocol ComposeViewControllerDelegate: class {
     func didAddPost(post: Tweet)
 }
 
-class ComposeViewController: UIViewController {
+class ComposeViewController: UIViewController, UITextViewDelegate {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
@@ -32,7 +32,8 @@ class ComposeViewController: UIViewController {
         userName.text = user!.name
         userScreenName.text = user!.screenName
         
-        // Do any additional setup after loading the view.
+        // make self the text view delegate
+        tweetText.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -60,6 +61,12 @@ class ComposeViewController: UIViewController {
                     self.dismiss(animated: true, completion: nil)
                 }
             }
+        }
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        if tweetText.text == "Compose your gem here..." {
+            tweetText.text = ""
         }
     }
     
