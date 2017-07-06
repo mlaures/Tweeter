@@ -221,6 +221,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="edit-icon"/>
                             </button>
+                            <connections>
+                                <action selector="newPost:" destination="5YO-Vh-39k" id="pk8-Se-gjS"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -232,10 +235,10 @@
             </objects>
             <point key="canvasLocation" x="1660" y="36.431784107946029"/>
         </scene>
-        <!--View Controller-->
+        <!--Compose View Controller-->
         <scene sceneID="CAR-IQ-rrD">
             <objects>
-                <viewController id="0dW-zk-wOI" sceneMemberID="viewController">
+                <viewController id="0dW-zk-wOI" customClass="ComposeViewController" customModule="twitter_alamofire_demo" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="gcM-uW-Imb"/>
                         <viewControllerLayoutGuide type="bottom" id="Vbk-S9-yxr"/>
@@ -294,6 +297,9 @@
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="close-icon"/>
                             </button>
+                            <connections>
+                                <action selector="cancelPost:" destination="0dW-zk-wOI" id="rR6-Q7-VYg"/>
+                            </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" style="plain" id="T6D-Ms-RQl">
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="jVE-lQ-TQE">
@@ -302,6 +308,9 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                 <state key="normal" title="Post"/>
                             </button>
+                            <connections>
+                                <action selector="postTweet:" destination="0dW-zk-wOI" id="2v0-SG-JRj"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                 </viewController>

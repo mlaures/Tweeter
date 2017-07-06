@@ -84,6 +84,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         APIManager.shared.logout()
     }
     
+    @IBAction func newPost(_ sender: Any) {
+        // make the segue (any information passed into compose view should be put in prepare function)
+        performSegue(withIdentifier: "composeSegue", sender: sender)
+    }
     
     /*
      // MARK: - Navigation
