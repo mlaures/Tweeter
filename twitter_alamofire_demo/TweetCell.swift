@@ -22,38 +22,52 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var retweetCountLabel: UILabel!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var favoriteCountLabel: UILabel!
+    @IBOutlet weak var retweeterLabel: UILabel!
     
     
     var cellTweet: Tweet! {
         didSet {
-            refreshData()
+            // pass in the original tweet (whether or not it is a retweeted one) and include the reposter
+            if let original = cellTweet.originalTweet {
+                refreshData(tweet: original, reposter: cellTweet.user.name)
+            } else {
+                refreshData(tweet: cellTweet, reposter: nil)
+            }
         }
     }
     
-    func refreshData() {
+    func refreshData(tweet: Tweet, reposter: String?) {
         
         // main body of the tweet
-        tweetTextLabel.text = cellTweet.text
-        userNameLabel.text = cellTweet.user.name
-        tweetTimeStamp.text = cellTweet.createdAtString
-        if let screenName = cellTweet.user.screenName {
+        tweetTextLabel.text = tweet.text
+        userNameLabel.text = tweet.user.name
+        tweetTimeStamp.text = tweet.createdAtString
+        if let screenName = tweet.user.screenName {
             userScreenNamelabel.text = "@ \(screenName)"
         }
-        if let url = cellTweet.user.profileImageURL {
+        if let url = tweet.user.profileImageURL {
             userProfileImage.af_setImage(withURL: url)
         }
         
-        // extras for the tweet
-        retweetCountLabel.text = String(describing: cellTweet.retweetCount)
-        favoriteCountLabel.text = String(describing: cellTweet.favoriteCount!)
+        // let the user know about a possible reposter
+        if let repost = reposter {
+            retweeterLabel.isHidden = false
+            retweeterLabel.text = "\(repost) retweeted this"
+        } else {
+            retweeterLabel.isHidden = true
+        }
         
-        if cellTweet.retweeted {
+        // stats for the tweet
+        retweetCountLabel.text = String(describing: tweet.retweetCount)
+        favoriteCountLabel.text = String(describing: tweet.favoriteCount!)
+        
+        if tweet.retweeted {
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon-green"), for: .normal)
         } else {
             retweetButton.setImage(#imageLiteral(resourceName: "retweet-icon"), for: .normal)
             
         }
-        if cellTweet.favorited! {
+        if tweet.favorited! {
             favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon-red"), for: .normal)
         } else {
             favoriteButton.setImage(#imageLiteral(resourceName: "favor-icon"), for: .normal)
@@ -74,10 +88,9 @@ class TweetCell: UITableViewCell {
                     print(error.localizedDescription)
                 } else {
                     if let tweet = tweet {
-                        // set the returned data as the new data for the cell
+                        // set the returned data as the new data for the cell (automatically refreshes cell)
                         self.cellTweet = tweet
                         
-                        self.refreshData()
                     }
                 }
             })
@@ -92,10 +105,8 @@ class TweetCell: UITableViewCell {
                     print(error.localizedDescription)
                 } else {
                     if let tweet = tweet {
-                        // set the returned data as new data for the cell
+                        // set the returned data as new data for the cell (automatically refreshes cell)
                         self.cellTweet = tweet
-                        
-                        self.refreshData()
                     }
                 }
             })
@@ -131,10 +142,9 @@ class TweetCell: UITableViewCell {
                     print(error.localizedDescription)
                 } else {
                     if let tweet = tweet {
-                        // set the returned data as the new data for the cell
+                        // set the returned data as the new data for the cell (automatically refreshes data)
                         self.cellTweet = tweet
                         
-                        self.refreshData()
                     }
                 }
             })
