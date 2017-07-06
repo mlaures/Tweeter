@@ -313,6 +313,11 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="userImage" destination="pUF-zi-GfN" id="CpY-w1-SOA"/>
+                        <outlet property="userName" destination="FrL-tV-inu" id="bmh-LJ-Q3D"/>
+                        <outlet property="userScreenName" destination="TjZ-U6-psd" id="n6F-32-9Xg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YqD-KZ-wH8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

@@ -7,12 +7,23 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class ComposeViewController: UIViewController {
 
+    @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var userScreenName: UILabel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // display the current user's name, profile image, and screen name
+        let user = User.current
+        userImage.af_setImage(withURL: user!.profileImageURL!)
+        userName.text = user!.name
+        userScreenName.text = user!.screenName
+        
         // Do any additional setup after loading the view.
     }
 
