@@ -251,8 +251,24 @@ class APIManager: SessionManager {
     }
     
     // MARK: TODO: Compose Tweet
-    
-    
+    func compose (with message: String, completion: @escaping (Tweet?, Error?)->()) {
+        // make the status that will be posted to the network
+        
+        let urlString = "https://api.twitter.com/1.1/statuses/update.json"
+        let parameters = ["status" : message]
+        request(urlString, method: .post, parameters: parameters, encoding: JSONEncoding.default)
+            .validate()
+            .responseJSON { (response) in
+                if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
+                    let tweet = Tweet(dictionary: tweetDictionary)
+                    completion(tweet, nil)
+                } else {
+                    print(response.description)
+                    completion(nil, response.result.error)
+                }
+        }
+    }
+
     // MARK: TODO: Get User Timeline
     
     
