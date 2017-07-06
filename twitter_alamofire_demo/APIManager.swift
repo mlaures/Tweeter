@@ -162,7 +162,6 @@ class APIManager: SessionManager {
         }
     }
     
-    // MARK: TODO: Retweet
     func retweet (with tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
         // set up url and parameters for network call
         let id = tweet.id
@@ -185,8 +184,74 @@ class APIManager: SessionManager {
     }
     
     // MARK: TODO: Un-Retweet
+    func unretweet (with tweet: Tweet, completion: @escaping (Tweet?, Error?) -> ()) {
+        var originalID: Int64? // paramater for the original tweet id
+        var id: Int64? // parameter for the user retweet id
+        
+        // get the original tweet
+        if let originalTweet = tweet.originalTweet {
+            originalID = originalTweet.id
+        } else {
+            originalID = tweet.id
+        }
+        
+        print(originalID)
+        
+        // get the tweet that needs to be destroyed (one's own tweet) with network request
+        let urlString = "https://api.twitter.com/1.1/statuses/show.json"
+        if let originalID = originalID {
+            print("original ID: \(originalID)")
+            let parameters: Parameters = [
+                "id" : originalID,
+                "include_my_retweet" : 1
+            ]
+            
+            // network request for the original tweet with the user retweet id
+            print("starting original network request")
+            request(urlString, method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: nil)
+                .validate()
+                .responseJSON { (response: DataResponse<Any>) in
+                    print(response.result.isSuccess)
+                    if response.result.isSuccess, let tweetDictionary = response.result.value as? [String:Any] {
+                        print(tweetDictionary)
+                        let idDictionary = tweetDictionary["current_user_retweet"] as! [String:Any]
+                        print(idDictionary)
+                        id = idDictionary["id"] as! Int64
+                    } else {
+                        print("original tweet network request")
+                        print(response.description)
+                        print(response.result.error!.localizedDescription)
+                    }
+            }
+        } else {
+            print ("there is no original tweet")
+        }
+        
+        
+        print("start destroy network request")
+        // destroy the retweet through its id
+        print("status id: \(id)")
+        let urlDestroy = "https://api.twitter.com/1.1/statuses/unretweet/\(id).json"
+        request(urlDestroy, method: .post, parameters: nil, encoding: URLEncoding.queryString, headers: nil)
+            .validate()
+            .responseJSON { (response) in
+                if response.result.isSuccess{
+                    completion(nil, nil)
+                } else {
+                    // network request failed so pass in the error
+                    print("destroy failed")
+                    print(response.description)
+                    completion(nil, response.result.error)
+                }
+        }
+        
+        
+        
+
+    }
     
     // MARK: TODO: Compose Tweet
+    
     
     // MARK: TODO: Get User Timeline
     

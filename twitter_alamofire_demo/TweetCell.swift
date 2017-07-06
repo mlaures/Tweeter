@@ -112,6 +112,13 @@ class TweetCell: UITableViewCell {
             self.retweetCountLabel.text = String(describing: cellTweet.retweetCount - 1)
 
             // make the network call
+            APIManager.shared.unretweet(with: cellTweet, completion: { (tweet, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    print("retweet deleted")
+                }
+            })
             
         } else if !cellTweet.retweeted {
             // change what the user sees to reflect the action of retweeting
