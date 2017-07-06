@@ -9,11 +9,19 @@
 import UIKit
 import AlamofireImage
 
+protocol ComposeViewControllerDelegate {
+    func didAddPost(post: Tweet)
+}
+
 class ComposeViewController: UIViewController {
 
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userScreenName: UILabel!
+    @IBOutlet weak var tweetText: UITextView!
+    
+    // make the view controller where it is coming from as the delegate
+    weak var delegate: ComposeViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,8 +46,18 @@ class ComposeViewController: UIViewController {
     
     @IBAction func postTweet(_ sender: Any) {
         // Make the call to API
-        
-        // make sure that the tweet shows up immediately in the feed
+        APIManager.shared.compose(with: tweetText.text) { (tweet, error) in
+            if let error = error {
+                // there has been an error, must show this
+                print(error.localizedDescription)
+            } else {
+                if let tweet = tweet {
+                    // pass this tweet into the feed so that is shows up immediately
+                    self.delegate?.didAddPost(post: tweet)
+                    print("tweet properly posted")
+                }
+            }
+        }
     }
     
 

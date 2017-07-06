@@ -314,6 +314,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tweetText" destination="PEq-hW-b9O" id="oXJ-3C-kvc"/>
                         <outlet property="userImage" destination="pUF-zi-GfN" id="CpY-w1-SOA"/>
                         <outlet property="userName" destination="FrL-tV-inu" id="bmh-LJ-Q3D"/>
                         <outlet property="userScreenName" destination="TjZ-U6-psd" id="n6F-32-9Xg"/>
