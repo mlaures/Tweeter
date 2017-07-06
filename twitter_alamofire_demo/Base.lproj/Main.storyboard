@@ -581,6 +581,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="tableHeaderView" destination="U0r-ea-bo6" id="xfg-iF-y7d"/>
                         <outlet property="tableView" destination="mJ5-W5-gfc" id="jBx-xA-nB4"/>
                     </connections>
                 </viewController>
