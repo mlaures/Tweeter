@@ -14,8 +14,8 @@ The following **required** functionality is completed:
 - [x] User can view last 20 tweets from their home timeline
 - [x] In the home timeline, user can view tweet with the user profile picture, username, tweet text, and timestamp.
 - [x] User can pull to refresh.
-- [ ] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
-- [ ] User can compose a new tweet by tapping on a compose button.
+- [x] User can tap the retweet and favorite buttons in a tweet cell to retweet and/or favorite a tweet.
+- [x] User can compose a new tweet by tapping on a compose button.
 - [x] Using AutoLayout, the Tweet cell should adjust it's layout for iPhone 7, Plus and SE device sizes as well as accommodate device rotation.
 - [x] The current signed in user will be persisted across restarts
 
@@ -24,7 +24,7 @@ The following **optional** features are implemented:
 - [ ] Tweet Details Page: User can tap on a tweet to view it, with controls to retweet, favorite, and reply.
 - [ ] User can view their profile in a profile tab
 - [ ] User should display the relative timestamp for each tweet "8m", "7h"
-- [ ] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
+- [x] User should be able to unretweet and unfavorite and should decrement the retweet and favorite count.
 - [ ] Links in tweets are clickable
 - [ ] User can tap the profile image in any tweet to see another user's profile
 - [ ] Contains the user header view: picture and tagline
@@ -32,7 +32,7 @@ The following **optional** features are implemented:
 - [ ] Profile view should include that user's timeline
 - [ ] User can load more tweets once they reach the bottom of the feed using infinite loading similar to the actual Twitter client.
 - [ ] When composing, you should have a countdown in the upper right for the tweet limit.
-- [ ] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
+- [x] After creating a new tweet, a user should be able to view it in the timeline immediately without refetching the timeline from the network.
 - [ ] User can reply to any tweet, and replies should be prefixed with the username and the reply_id should be set when posting the tweet
 - [ ] Profile view should include that user's timeline
 - [ ] Pulling down the profile page should blur and resize the header image.
