@@ -15,6 +15,7 @@ class User {
     var name: String?
     var screenName: String?
     var profileImageURL: URL?
+    var bio: String?
     
     // for persisted user
     var dictionary: [String: Any]?
@@ -55,6 +56,7 @@ class User {
         // initialize other user properties
         name = dictionary["name"] as? String
         screenName = dictionary["screen_name"] as? String
+        bio = dictionary["description"] as? String
         
         // for the image
         let profileImage = dictionary["profile_image_url"] as? String
