@@ -393,25 +393,25 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bio" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H0M-B4-QZp">
-                                            <rect key="frame" x="8" y="158" width="359" height="21"/>
+                                            <rect key="frame" x="8" y="158" width="359" height="43"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Tweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcr-Yb-dpO">
-                                            <rect key="frame" x="8" y="187" width="65" height="21"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" verticalCompressionResistancePriority="751" text="#Tweets" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vcr-Yb-dpO">
+                                            <rect key="frame" x="8" y="209" width="65" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Following" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhf-yR-5Je">
-                                            <rect key="frame" x="81" y="187" width="83" height="21"/>
+                                            <rect key="frame" x="81" y="209" width="83" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="#Followers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jrG-cN-2r4">
-                                            <rect key="frame" x="172" y="187" width="83" height="21"/>
+                                            <rect key="frame" x="172" y="209" width="83" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -435,7 +435,7 @@
                                         <constraint firstAttribute="trailing" secondItem="kiJ-Gx-Lqt" secondAttribute="trailing" id="9Ft-P7-V8D"/>
                                         <constraint firstItem="H0M-B4-QZp" firstAttribute="leading" secondItem="o8u-Av-rTD" secondAttribute="leading" id="9Ur-xv-ktI"/>
                                         <constraint firstItem="kiJ-Gx-Lqt" firstAttribute="top" secondItem="U0r-ea-bo6" secondAttribute="top" id="IeU-i9-FT7"/>
-                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="vcr-Yb-dpO" secondAttribute="bottom" constant="8" id="SNv-u1-dmR"/>
+                                        <constraint firstAttribute="bottom" secondItem="vcr-Yb-dpO" secondAttribute="bottom" constant="8" id="SNv-u1-dmR"/>
                                         <constraint firstItem="vcr-Yb-dpO" firstAttribute="leading" secondItem="o8u-Av-rTD" secondAttribute="leading" id="Twg-Yy-T30"/>
                                         <constraint firstItem="Zhf-yR-5Je" firstAttribute="centerY" secondItem="vcr-Yb-dpO" secondAttribute="centerY" id="VWV-Cr-Igf"/>
                                         <constraint firstItem="jrG-cN-2r4" firstAttribute="centerY" secondItem="vcr-Yb-dpO" secondAttribute="centerY" id="WkK-tg-TbF"/>
@@ -615,6 +615,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="profileBackground" destination="kiJ-Gx-Lqt" id="PVw-jo-vw0"/>
                         <outlet property="profileBio" destination="H0M-B4-QZp" id="sqX-I2-vG2"/>
                         <outlet property="profileFollowers" destination="jrG-cN-2r4" id="8kb-is-qlA"/>
                         <outlet property="profileFollowing" destination="Zhf-yR-5Je" id="2fG-em-hNa"/>
