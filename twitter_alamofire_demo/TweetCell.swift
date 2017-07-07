@@ -47,6 +47,10 @@ class TweetCell: UITableViewCell {
         }
         if let url = tweet.user.profileImageURL {
             userProfileImage.af_setImage(withURL: url)
+            // set image to be circular
+            userProfileImage.layer.cornerRadius = userProfileImage.frame.height/2
+            userProfileImage.clipsToBounds = true
+
         }
         
         // let the user know about a possible reposter

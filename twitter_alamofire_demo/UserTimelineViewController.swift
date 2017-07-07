@@ -109,6 +109,10 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         profileTweets.text = "\(user.tweetCount) Tweets"
         profileFollowers.text = "\(user.followerCount) Followers"
         profileFollowing.text = "\(user.followingCount) Following"
+        
+        // set profile image top be circular
+        profileImage.layer.cornerRadius = profileImage.frame.height/2
+        profileImage.clipsToBounds = true
     }
 
     override func didReceiveMemoryWarning() {
