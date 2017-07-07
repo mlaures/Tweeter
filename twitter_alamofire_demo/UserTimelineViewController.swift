@@ -32,6 +32,9 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         
         // refresh control initialization for the table view
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(UserTimelineViewController.didPullToRefresh(_:)), for: .valueChanged)
+        tableView.insertSubview(refreshControl, at: 0)
         
         // have the view controller deal with the table view
         tableView.dataSource = self
@@ -47,6 +50,33 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         // set the navigation controller
         navController = self.navigationController
         
+    }
+    
+    func didPullToRefresh(_: UIRefreshControl) {
+        if let user = user {
+            // do network call with the passed in user
+            APIManager.shared.getUserTimeline(with: user, completion: { (tweets, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    // make the list of tweets and reload the table data
+                    self.tweets = tweets!
+                    self.tableView.reloadData()
+                    self.refreshControl.endRefreshing()
+                }
+            })
+        } else {
+            // do network call with the current user
+            APIManager.shared.getUserTimeline(with: User.current!, completion: { (tweets, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                } else {
+                    // make the list of tweets and reload the table data
+                    self.tweets = tweets!
+                    self.tableView.reloadData()
+                }
+            })
+        }
     }
     
     override func viewDidLayoutSubviews() {
