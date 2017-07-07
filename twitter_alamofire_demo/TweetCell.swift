@@ -43,7 +43,7 @@ class TweetCell: UITableViewCell {
         userNameLabel.text = tweet.user.name
         tweetTimeStamp.text = tweet.createdAtString
         if let screenName = tweet.user.screenName {
-            userScreenNamelabel.text = "@ \(screenName)"
+            userScreenNamelabel.text = "@\(screenName)"
         }
         if let url = tweet.user.profileImageURL {
             userProfileImage.af_setImage(withURL: url)
