@@ -20,6 +20,7 @@ class User {
     var tweetCount: Int64
     var followingCount: Int64
     var followerCount: Int64
+    var backgroundImageURL: URL?
     
     // for persisted user
     var dictionary: [String: Any]?
@@ -67,9 +68,13 @@ class User {
         followerCount = dictionary["followers_count"] as! Int64
 
         
-        // for the image
+        // for the images
         let profileImage = dictionary["profile_image_url"] as? String
         profileImageURL = URL(string: profileImage!)
+        let background = dictionary["profile_banner_url"] as? String
+        if let background = background {
+            backgroundImageURL = URL(string: background)
+        }
     }
     
     

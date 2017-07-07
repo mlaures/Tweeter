@@ -19,7 +19,7 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
-    
+    @IBOutlet weak var profileBackground: UIImageView!
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileScreenName: UILabel!
@@ -99,6 +99,10 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
     func setHeader (user: User) {
         // set the table header with all the user info
         profileImage.af_setImage(withURL: user.profileImageURL!)
+        if let url = user.backgroundImageURL {
+            profileBackground.af_setImage(withURL: url)
+
+        }
         profileBio.text = user.bio
         profileName.text = user.name
         profileScreenName.text = user.screenName
