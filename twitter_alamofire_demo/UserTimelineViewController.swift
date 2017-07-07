@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AlamofireImage
 
 class UserTimelineViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ComposeViewControllerDelegate {
     
@@ -14,10 +15,18 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
     var user: User?
     
     var refreshControl: UIRefreshControl!
+    var navController: UINavigationController!
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableHeaderView: UIView!
     
+    @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var profileName: UILabel!
+    @IBOutlet weak var profileScreenName: UILabel!
+    @IBOutlet weak var profileBio: UILabel!
+    @IBOutlet weak var profileTweets: UILabel!
+    @IBOutlet weak var profileFollowing: UILabel!
+    @IBOutlet weak var profileFollowers: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +44,24 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         // change separator style
         tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         
-        // makes a table header
-        tableView.tableHeaderView = tableHeaderView
+        // set the navigation controller
+        navController = self.navigationController
         
+    }
+    
+    override func viewDidLayoutSubviews() {
+        // resize the header view
+        tableHeaderView.setNeedsLayout()
+        tableHeaderView.layoutIfNeeded()
+        
+        // set sizes for the frame explicitly
+        let height = tableHeaderView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+        var frame = tableHeaderView.frame
+        frame.size.height  = height
+        tableHeaderView.frame = frame
+        
+        // as the view is now the correct size, set it as the table header
+        tableView.tableHeaderView = tableHeaderView
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -53,6 +77,8 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
                     self.tableView.reloadData()
                 }
             })
+            // set the table header for the correct user
+            setHeader(user: user)
         } else {
             // do network call with the current user
             APIManager.shared.getUserTimeline(with: User.current!, completion: { (tweets, error) in
@@ -64,8 +90,21 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
                     self.tableView.reloadData()
                 }
             })
+            // set the table header for the correct user
+            setHeader(user: User.current!)
         }
         
+    }
+    
+    func setHeader (user: User) {
+        // set the table header with all the user info
+        profileImage.af_setImage(withURL: user.profileImageURL!)
+        profileBio.text = user.bio
+        profileName.text = user.name
+        profileScreenName.text = user.screenName
+        profileTweets.text = "\(user.tweetCount) Tweets"
+        profileFollowers.text = "\(user.followerCount) Followers"
+        profileFollowing.text = "\(user.followingCount) Following"
     }
 
     override func didReceiveMemoryWarning() {
