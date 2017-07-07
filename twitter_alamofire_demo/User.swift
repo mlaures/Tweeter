@@ -17,6 +17,9 @@ class User {
     var profileImageURL: URL?
     var bio: String?
     var id: Int64
+    var tweetCount: Int64
+    var followingCount: Int64
+    var followerCount: Int64
     
     // for persisted user
     var dictionary: [String: Any]?
@@ -59,6 +62,10 @@ class User {
         screenName = dictionary["screen_name"] as? String
         bio = dictionary["description"] as? String
         id = dictionary["id"] as! Int64
+        tweetCount = dictionary["statuses_count"] as! Int64
+        followingCount = dictionary["friends_count"] as! Int64
+        followerCount = dictionary["followers_count"] as! Int64
+
         
         // for the image
         let profileImage = dictionary["profile_image_url"] as? String
