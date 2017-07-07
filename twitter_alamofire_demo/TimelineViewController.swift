@@ -16,6 +16,8 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     var refreshControl: UIRefreshControl!
     
+    var tapGestureRecognizer: UITapGestureRecognizer! = nil
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -46,6 +48,24 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         }
     }
     
+    func imageTapped (tapGestureRecognizer: UITapGestureRecognizer) {
+        
+        // this is to find the row that the image was in to pass in the correct user
+        let position = tapGestureRecognizer.view?.convert(CGPoint.zero, to: self.tableView)
+        let indexPath = self.tableView.indexPathForRow(at: position!)
+        if let indexPath = indexPath {
+            // you can have the row now!
+            let chosenTweet = tweets[indexPath.row]
+            let user = chosenTweet.user
+            
+            // perform the segue with the user to put straight into the user timeline view
+            performSegue(withIdentifier: "userTimelineSegue", sender: user)
+
+        } else {
+            print("could not locate the cell/ row")
+        }
+    }
+    
     func didPullToRefresh(_: UIRefreshControl) {
         APIManager.shared.getHomeTimeLine { (tweets, error) in
             if let tweets = tweets {
@@ -66,6 +86,12 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "TweetCell", for: indexPath) as! TweetCell
         
         cell.cellTweet = tweets[indexPath.row]
+        
+        // recognize an object that the user touches
+        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.imageTapped(tapGestureRecognizer:)))
+        // apply the gesture recognizer to the elements that need to recognize it
+        cell.userProfileImage.isUserInteractionEnabled = true
+        cell.userProfileImage.addGestureRecognizer(tapGestureRecognizer)
         
         return cell
     }
@@ -98,6 +124,10 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
             composeViewController.delegate = self
         }
 
+        if segue.identifier == "userTimelineSegue" {
+            let userTimelineViewController = segue.destination as! UserTimelineViewController
+            userTimelineViewController.user = sender as! User
+        }
      }
     
     func didAddPost(post: Tweet) {
