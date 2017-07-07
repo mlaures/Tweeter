@@ -74,6 +74,8 @@ class User {
         let background = dictionary["profile_banner_url"] as? String
         if let background = background {
             backgroundImageURL = URL(string: background)
+        } else if let alternate = dictionary["profile_background_image_url"] as? String {
+            backgroundImageURL = URL(string: alternate)
         }
     }
     
