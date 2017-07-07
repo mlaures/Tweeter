@@ -135,7 +135,7 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         }
         profileBio.text = user.bio
         profileName.text = user.name
-        profileScreenName.text = "@\(user.screenName)"
+        profileScreenName.text = "@\(user.screenName!)"
         profileTweets.text = "\(user.tweetCount) Tweets"
         profileFollowers.text = "\(user.followerCount) Followers"
         profileFollowing.text = "\(user.followingCount) Following"
