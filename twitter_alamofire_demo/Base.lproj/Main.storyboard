@@ -160,6 +160,12 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeAgo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7rR-TD-eEZ">
+                                                    <rect key="frame" x="295" y="31" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="he1-Ye-iKb" firstAttribute="leading" secondItem="zd2-Er-659" secondAttribute="leadingMargin" constant="8" id="0dW-xr-pHf"/>
@@ -176,6 +182,7 @@
                                                 <constraint firstItem="epC-Fs-Q5Z" firstAttribute="top" secondItem="m5V-tw-5sG" secondAttribute="bottom" constant="8" id="SbS-cH-IgS"/>
                                                 <constraint firstItem="yqu-6E-1rb" firstAttribute="centerY" secondItem="0eL-rM-sYv" secondAttribute="centerY" id="X6g-41-RAM"/>
                                                 <constraint firstItem="epC-Fs-Q5Z" firstAttribute="leading" secondItem="he1-Ye-iKb" secondAttribute="leading" id="ZHS-PA-ls0"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="7rR-TD-eEZ" secondAttribute="trailing" constant="8" id="arB-cM-9Ir"/>
                                                 <constraint firstItem="5Sw-Ll-bfU" firstAttribute="leading" secondItem="0eL-rM-sYv" secondAttribute="trailing" constant="10" id="bgZ-k5-OWV"/>
                                                 <constraint firstItem="he1-Ye-iKb" firstAttribute="top" secondItem="zd2-Er-659" secondAttribute="topMargin" constant="8" id="cjb-Ot-JR0"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="umC-vZ-vvy" secondAttribute="trailing" constant="8" id="deU-Mi-AeM"/>
@@ -183,6 +190,7 @@
                                                 <constraint firstItem="ElO-Fo-C1g" firstAttribute="centerY" secondItem="ikv-eY-5dB" secondAttribute="centerY" id="h8J-PA-NjE"/>
                                                 <constraint firstItem="m5V-tw-5sG" firstAttribute="leading" secondItem="he1-Ye-iKb" secondAttribute="trailing" constant="8" id="k25-gY-VwK"/>
                                                 <constraint firstItem="0eL-rM-sYv" firstAttribute="leading" secondItem="he1-Ye-iKb" secondAttribute="leading" id="ldg-CT-lzX"/>
+                                                <constraint firstItem="7rR-TD-eEZ" firstAttribute="centerY" secondItem="he1-Ye-iKb" secondAttribute="centerY" id="nFL-nm-9I6"/>
                                                 <constraint firstItem="dUI-SK-Aqn" firstAttribute="bottom" secondItem="he1-Ye-iKb" secondAttribute="top" id="pEX-Wq-PxT"/>
                                                 <constraint firstItem="0eL-rM-sYv" firstAttribute="top" secondItem="wNw-Jm-jYZ" secondAttribute="bottom" constant="8" id="pob-t2-os3"/>
                                                 <constraint firstAttribute="trailing" secondItem="epC-Fs-Q5Z" secondAttribute="trailing" constant="8" id="t3O-Hf-fvX"/>
@@ -202,6 +210,7 @@
                                             <outlet property="retweetCountLabel" destination="yqu-6E-1rb" id="Y3U-D4-H8F"/>
                                             <outlet property="retweeterLabel" destination="dUI-SK-Aqn" id="CCP-tB-uBb"/>
                                             <outlet property="tweetTextLabel" destination="epC-Fs-Q5Z" id="ZLP-IG-Wsf"/>
+                                            <outlet property="tweetTimeAgo" destination="7rR-TD-eEZ" id="ySq-jK-bhO"/>
                                             <outlet property="tweetTimeStamp" destination="wNw-Jm-jYZ" id="EDr-U0-rYE"/>
                                             <outlet property="userNameLabel" destination="umC-vZ-vvy" id="jIz-dx-vJA"/>
                                             <outlet property="userProfileImage" destination="he1-Ye-iKb" id="UQ0-qO-AV9"/>
@@ -244,7 +253,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZlF-i2-Ves" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2697" y="36"/>
+            <point key="canvasLocation" x="2696.8000000000002" y="35.532233883058474"/>
         </scene>
         <!--Compose View Controller-->
         <scene sceneID="CAR-IQ-rrD">
@@ -375,7 +384,6 @@
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="kiJ-Gx-Lqt">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
-                                            <color key="backgroundColor" red="0.75829661969999995" green="0.7109816846" blue="1" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="125" id="XGN-o3-Q73"/>
                                             </constraints>
@@ -538,6 +546,12 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="timeAgo" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ugs-4G-fdQ">
+                                                    <rect key="frame" x="295" y="31" width="64" height="21"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="P7t-xK-eC0" secondAttribute="trailing" constant="8" id="5C3-tj-COJ"/>
@@ -559,8 +573,10 @@
                                                 <constraint firstItem="cAl-vB-V3Z" firstAttribute="centerY" secondItem="otA-11-Hf7" secondAttribute="centerY" id="Wm4-pE-AIP"/>
                                                 <constraint firstItem="e50-QI-I5O" firstAttribute="top" secondItem="LRj-gc-hLw" secondAttribute="bottom" constant="8" id="aMQ-0i-QgN"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="otA-11-Hf7" secondAttribute="bottom" constant="8" id="caq-UM-795"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="ugs-4G-fdQ" secondAttribute="trailing" constant="8" id="dhz-D0-kas"/>
                                                 <constraint firstItem="LRj-gc-hLw" firstAttribute="leading" secondItem="D1X-70-peg" secondAttribute="trailing" constant="8" id="f2a-Li-8w3"/>
                                                 <constraint firstItem="otA-11-Hf7" firstAttribute="top" secondItem="Uq9-a7-6mi" secondAttribute="bottom" constant="8" id="fCV-Tq-5xu"/>
+                                                <constraint firstItem="ugs-4G-fdQ" firstAttribute="centerY" secondItem="D1X-70-peg" secondAttribute="centerY" id="fSf-qy-Kqm"/>
                                                 <constraint firstItem="e50-QI-I5O" firstAttribute="leading" secondItem="D1X-70-peg" secondAttribute="leading" id="lt8-qG-mOp"/>
                                                 <constraint firstItem="P7t-xK-eC0" firstAttribute="trailing" secondItem="R9d-GT-fgn" secondAttribute="trailing" id="oaT-M4-XY0"/>
                                                 <constraint firstItem="cAl-vB-V3Z" firstAttribute="leading" secondItem="xpw-D0-xIe" secondAttribute="trailing" id="qip-ts-ESb"/>
@@ -580,6 +596,7 @@
                                             <outlet property="retweetCountLabel" destination="DRe-By-JtM" id="0iE-fg-2UX"/>
                                             <outlet property="retweeterLabel" destination="R9d-GT-fgn" id="18S-Qo-WLV"/>
                                             <outlet property="tweetTextLabel" destination="e50-QI-I5O" id="27b-ti-Xds"/>
+                                            <outlet property="tweetTimeAgo" destination="ugs-4G-fdQ" id="wjz-qz-wYL"/>
                                             <outlet property="tweetTimeStamp" destination="Uq9-a7-6mi" id="Oky-a5-VJZ"/>
                                             <outlet property="userNameLabel" destination="P7t-xK-eC0" id="0lh-6I-mBt"/>
                                             <outlet property="userProfileImage" destination="D1X-70-peg" id="zRS-V2-Iot"/>

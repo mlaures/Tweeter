@@ -8,6 +8,7 @@
 
 import UIKit
 import AlamofireImage
+import DateToolsSwift
 
 class TweetCell: UITableViewCell {
     
@@ -16,6 +17,7 @@ class TweetCell: UITableViewCell {
     @IBOutlet weak var userScreenNamelabel: UILabel!
     @IBOutlet weak var tweetTimeStamp: UILabel!
     @IBOutlet weak var userProfileImage: UIImageView!
+    @IBOutlet weak var tweetTimeAgo: UILabel!
     
     @IBOutlet weak var replyButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
@@ -52,6 +54,9 @@ class TweetCell: UITableViewCell {
             userProfileImage.clipsToBounds = true
 
         }
+        
+        // another time stamp
+        tweetTimeAgo.text = tweet.createdDate.shortTimeAgoSinceNow
         
         // let the user know about a possible reposter
         if let repost = reposter {
