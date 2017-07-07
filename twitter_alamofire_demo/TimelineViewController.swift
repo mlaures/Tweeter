@@ -16,8 +16,6 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
     
     var refreshControl: UIRefreshControl!
     
-    var tapGestureRecognizer: UITapGestureRecognizer! = nil
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -88,10 +86,17 @@ class TimelineViewController: UIViewController, UITableViewDelegate, UITableView
         cell.cellTweet = tweets[indexPath.row]
         
         // recognize an object that the user touches
-        let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.imageTapped(tapGestureRecognizer:)))
+        let screenNameGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.imageTapped(tapGestureRecognizer:)))
+        let nameGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.imageTapped(tapGestureRecognizer:)))
+        let imageGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(TimelineViewController.imageTapped(tapGestureRecognizer:)))
         // apply the gesture recognizer to the elements that need to recognize it
+        cell.userNameLabel.isUserInteractionEnabled = true
+        cell.userScreenNamelabel.isUserInteractionEnabled = true
         cell.userProfileImage.isUserInteractionEnabled = true
-        cell.userProfileImage.addGestureRecognizer(tapGestureRecognizer)
+        cell.userProfileImage.addGestureRecognizer(imageGestureRecognizer)
+        cell.userNameLabel.addGestureRecognizer(nameGestureRecognizer)
+        cell.userScreenNamelabel.addGestureRecognizer(screenNameGestureRecognizer)
+
         
         return cell
     }
