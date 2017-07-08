@@ -50,6 +50,9 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
         // set the navigation controller
         navController = self.navigationController
         
+        // set the table view header
+        tableView.tableHeaderView = tableHeaderView
+        
     }
     
     func didPullToRefresh(_: UIRefreshControl) {
@@ -80,18 +83,19 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     override func viewDidLayoutSubviews() {
-        // resize the header view
         tableHeaderView.setNeedsLayout()
         tableHeaderView.layoutIfNeeded()
         
         // set sizes for the frame explicitly
         let height = tableHeaderView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         var frame = tableHeaderView.frame
-        frame.size.height  = height
+        frame.size.height = height
         tableHeaderView.frame = frame
         
-        // as the view is now the correct size, set it as the table header
         tableView.tableHeaderView = tableHeaderView
+        
+        // resize the header view
+  
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -122,8 +126,29 @@ class UserTimelineViewController: UIViewController, UITableViewDelegate, UITable
             })
             // set the table header for the correct user
             setHeader(user: User.current!)
+            
+            // add in logout button programmatically
+            let logoutButton = UIButton(type: .custom)
+            logoutButton.setTitle("Logout", for: .normal)
+            logoutButton.frame = CGRect(x: 100, y:100, width: 80, height: 30)
+            logoutButton.addTarget(self, action: #selector(UserTimelineViewController.didTapLogout(_:)), for: .touchUpInside)
+            self.view.addSubview(logoutButton)
+            let button = UIBarButtonItem(customView: logoutButton)
+            
+            self.navigationItem.setLeftBarButton(button, animated: true)
+            
         }
         
+    }
+    
+    @IBAction func newPost(_ sender: Any) {
+        // make the segue (any information passed into compose view should be put in prepare function)
+        print("make a new post")
+        performSegue(withIdentifier: "composeSegue", sender: sender)
+    }
+    
+    func didTapLogout(_ sender: Any) {
+        APIManager.shared.logout()
     }
     
     func setHeader (user: User) {
