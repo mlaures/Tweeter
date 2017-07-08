@@ -9,10 +9,11 @@
 import UIKit
 import AlamofireImage
 import DateToolsSwift
+import TTTAttributedLabel
 
-class TweetCell: UITableViewCell {
+class TweetCell: UITableViewCell, TTTAttributedLabelDelegate {
     
-    @IBOutlet weak var tweetTextLabel: UILabel!
+    @IBOutlet weak var tweetTextLabel: TTTAttributedLabel!
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var userScreenNamelabel: UILabel!
     @IBOutlet weak var tweetTimeStamp: UILabel!
@@ -40,8 +41,16 @@ class TweetCell: UITableViewCell {
     
     func refreshData(tweet: Tweet, reposter: String?) {
         
-        // main body of the tweet
+        // text is interactable, and can check types eg link
+        tweetTextLabel.delegate = self
+        tweetTextLabel.isUserInteractionEnabled = true
+        tweetTextLabel.enabledTextCheckingTypes = NSTextCheckingResult.CheckingType.link.rawValue
+        
+        // this is the text to evaluate for links
         tweetTextLabel.text = tweet.text
+
+        
+        // tweet details
         userNameLabel.text = tweet.user.name
         tweetTimeStamp.text = tweet.createdAtString
         if let screenName = tweet.user.screenName {
@@ -83,6 +92,10 @@ class TweetCell: UITableViewCell {
             
         }
         
+    }
+    
+    func attributedLabel(_ label: TTTAttributedLabel!, didSelectLinkWith url: URL!) {
+        UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
     
     @IBAction func toggleFavorite(_ sender: Any) {
