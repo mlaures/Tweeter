@@ -288,6 +288,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="140" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xvb-bP-QAg">
+                                <rect key="frame" x="322" y="99" width="29" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="pUF-zi-GfN">
                                 <rect key="frame" x="20" y="84" width="50" height="50"/>
                                 <constraints>
@@ -308,8 +314,10 @@
                             <constraint firstItem="pUF-zi-GfN" firstAttribute="top" secondItem="gcM-uW-Imb" secondAttribute="bottom" constant="20" id="Ihe-bG-BrP"/>
                             <constraint firstItem="PEq-hW-b9O" firstAttribute="top" secondItem="TjZ-U6-psd" secondAttribute="bottom" constant="20" id="Jga-dL-IBY"/>
                             <constraint firstItem="FrL-tV-inu" firstAttribute="leading" secondItem="pUF-zi-GfN" secondAttribute="trailing" constant="8" id="NyK-or-wPA"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="xvb-bP-QAg" secondAttribute="trailing" constant="8" id="Q4Q-Ne-Cn6"/>
                             <constraint firstItem="TjZ-U6-psd" firstAttribute="bottom" secondItem="pUF-zi-GfN" secondAttribute="bottom" id="Qu4-ZN-7FT"/>
                             <constraint firstAttribute="trailing" secondItem="FrL-tV-inu" secondAttribute="trailing" constant="20" id="aC6-Tr-Klp"/>
+                            <constraint firstItem="xvb-bP-QAg" firstAttribute="centerY" secondItem="pUF-zi-GfN" secondAttribute="centerY" id="o8G-zQ-HgS"/>
                             <constraint firstAttribute="trailing" secondItem="TjZ-U6-psd" secondAttribute="trailing" constant="20" id="twm-td-pBK"/>
                         </constraints>
                     </view>
@@ -337,6 +345,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="characterCount" destination="xvb-bP-QAg" id="ejw-lh-b8E"/>
                         <outlet property="tweetText" destination="PEq-hW-b9O" id="oXJ-3C-kvc"/>
                         <outlet property="userImage" destination="pUF-zi-GfN" id="CpY-w1-SOA"/>
                         <outlet property="userName" destination="FrL-tV-inu" id="bmh-LJ-Q3D"/>

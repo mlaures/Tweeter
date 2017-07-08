@@ -19,6 +19,9 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var userScreenName: UILabel!
     @IBOutlet weak var tweetText: UITextView!
+    @IBOutlet weak var characterCount: UILabel!
+    
+    var calc = 140
     
     // make the view controller where it is coming from as the delegate
     weak var delegate: ComposeViewControllerDelegate?
@@ -47,18 +50,19 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func postTweet(_ sender: Any) {
         // Make the call to API
-        print("making call")
-        APIManager.shared.compose(with: tweetText.text) { (tweet, error) in
-            if let error = error {
-                // there has been an error, must show this
-                print(error.localizedDescription)
-            } else {
-                if let tweet = tweet {
-                    // pass this tweet into the feed so that is shows up immediately
-                    self.delegate?.didAddPost(post: tweet)
-                    print(tweet)
-                    print("tweet properly posted")
-                    self.dismiss(animated: true, completion: nil)
+        if calc > 0, calc < 140 {
+            APIManager.shared.compose(with: tweetText.text) { (tweet, error) in
+                if let error = error {
+                    // there has been an error, must show this
+                    print(error.localizedDescription)
+                } else {
+                    if let tweet = tweet {
+                        // pass this tweet into the feed so that is shows up immediately
+                        self.delegate?.didAddPost(post: tweet)
+                        print(tweet)
+                        print("tweet properly posted")
+                        self.dismiss(animated: true, completion: nil)
+                    }
                 }
             }
         }
@@ -70,6 +74,17 @@ class ComposeViewController: UIViewController, UITextViewDelegate {
         }
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        calc = 140 - tweetText.text.characters.count
+        characterCount.text = String(describing: calc)
+        if calc <= 0 {
+            tweetText.textColor = UIColor.red
+            characterCount.textColor = UIColor.red
+        } else {
+            tweetText.textColor = UIColor.black
+            characterCount.textColor = UIColor.black
+        }
+    }
 
     /*
     // MARK: - Navigation
